@@ -9,6 +9,7 @@ export interface Profile {
   full_name: string;
   phone: string | null;
   class_id: string | null;
+  avatar_url: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -126,62 +127,71 @@ export interface Achievement {
 
 export interface Database {
   public: {
+    PostgrestVersion: '12';
     Tables: {
       profiles: {
         Row: Profile;
-        Insert: Omit<Profile, 'created_at' | 'updated_at'>;
+        Insert: Partial<Profile>;
         Update: Partial<Omit<Profile, 'id' | 'created_at'>>;
       };
       classes: {
         Row: Class;
-        Insert: Omit<Class, 'id' | 'created_at'>;
+        Insert: Omit<Class, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<Class, 'id' | 'created_at'>>;
       };
       subjects: {
         Row: Subject;
-        Insert: Omit<Subject, 'id' | 'created_at'>;
+        Insert: Omit<Subject, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<Subject, 'id' | 'created_at'>>;
       };
       periods: {
         Row: Period;
-        Insert: Omit<Period, 'id' | 'created_at'>;
+        Insert: Omit<Period, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<Period, 'id' | 'created_at'>>;
       };
       attendance: {
         Row: Attendance;
-        Insert: Omit<Attendance, 'id' | 'created_at'>;
+        Insert: Omit<Attendance, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<Attendance, 'id' | 'created_at'>>;
       };
       documents: {
         Row: Document;
-        Insert: Omit<Document, 'id' | 'created_at'>;
+        Insert: Omit<Document, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<Document, 'id' | 'created_at'>>;
       };
       quizzes: {
         Row: Quiz;
-        Insert: Omit<Quiz, 'id' | 'created_at'>;
+        Insert: Omit<Quiz, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<Quiz, 'id' | 'created_at'>>;
       };
       quiz_questions: {
         Row: QuizQuestion;
-        Insert: Omit<QuizQuestion, 'id' | 'created_at'>;
+        Insert: Omit<QuizQuestion, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<QuizQuestion, 'id' | 'created_at'>>;
       };
       quiz_attempts: {
         Row: QuizAttempt;
-        Insert: Omit<QuizAttempt, 'id' | 'created_at'>;
+        Insert: Omit<QuizAttempt, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<QuizAttempt, 'id' | 'created_at'>>;
       };
       quiz_responses: {
         Row: QuizResponse;
-        Insert: Omit<QuizResponse, 'id' | 'created_at'>;
+        Insert: Omit<QuizResponse, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<QuizResponse, 'id' | 'created_at'>>;
       };
       achievements: {
         Row: Achievement;
-        Insert: Omit<Achievement, 'id' | 'created_at'>;
+        Insert: Omit<Achievement, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<Achievement, 'id' | 'created_at'>>;
       };
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: {
+      user_role: UserRole;
+      attendance_status: AttendanceStatus;
+      document_category: DocumentCategory;
+      achievement_category: AchievementCategory;
     };
   };
 }
